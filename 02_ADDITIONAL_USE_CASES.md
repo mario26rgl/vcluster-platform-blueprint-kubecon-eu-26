@@ -2,9 +2,18 @@
 
 This part part of the documentation covers additional use cases for the setup we have created in this workshop.
 
+## Collab Mode like "Code with me" for Kubernetes Clusters
+
+
+### Access vCluster Platform or dedicated vCluster - 02-00 💻
+
+
+<img src="z_images/02-00-001.png" width="1000" style="border-radius: 24px;" />
+
+
 ## Test Bitwarden Secrets Manager Integration - Bitwarden 💻
 
-### How to work with External Secrets and Bitwarden - 02-01 💻
+### How to work with External Secrets and Bitwarden - 02-01 💻 (Skip)
 
 Just create a simple secret in Bitwarden like:
 
@@ -45,6 +54,8 @@ db-password   Opaque   1      11m
 ```
 
 ### How to add a new Cluster to the Hub - 02-02 💻👩‍🏫
+
+<img src="z_images/02-02-001.png" width="1000" style="border-radius: 24px;" />
 
 You have a controlplane cluster running, which was designed to be the hub cluster. You can add any Kubernetes cluster or even another vCluster as a spoke cluster to it.
 
@@ -109,10 +120,14 @@ vcluster-2-external-secrets     Synced        Healthy
 
 ## Add External Node - Beyond local Kubernetes Platform 💻👩‍🏫
 
+
+
 In this part we extend our local Kubernetes platform with an external node.
 The node can run anywhere and only needs an outgoing connection to the control plane cluster.
 
 ### Add External Node to vCluster (vind) - 02-03 💻👩‍🏫
+
+<img src="z_images/02-03-001.png" width="1000" style="border-radius: 24px;" />
 
 > ⚠️ This part requires a running VM with outgoing access to the controlplane cluster through the vCluster platform. You can create the VM with the provider of your choice using Terraform, Crossplane, Pulumi, ClickOps, etc. You should also be able to run custom scripts or init scripts like the command below to automatically connect the node to the vCluster platform.
 
@@ -132,6 +147,12 @@ Execute this command on your external VM and you will see that the node is added
 
 ```bash
 kubectl get nodes
+
+NAME           STATUS   ROLES                  AGE   VERSION
+controlplane   Ready    control-plane,master   5d    v1.35.0
+gpu-worker-0   Ready    <none>                 42s   v1.35.0
+worker-1       Ready    <none>                 5d    v1.35.0
+worker-2       Ready    <none>                 5d    v1.35.0
 ```
 
 Now you have not only connected an external node to your local cluster, but also integrated it through Tailscale behind the scenes into your service mesh without exposing the node to the public internet.
@@ -193,8 +214,13 @@ Then run the generate command to create the Helm umbrella charts and deploy them
 
 Commit and push the changes to your Git repository and Argo CD will create the applications automatically using the ApplicationSet.
 
-It will take around **5–10 minutes** until everything is ready.
-The GPU Operator installs the drivers and runtimes on the node, then Ollama is deployed, downloads the `gpt-oss-20b` model, and finally the agent connects to the LLM through the `modelConfig`.
+It will take around **10 minutes** until everything is ready.
+The GPU Operator installs the drivers and runtimes on the node, then Ollama is deployed, downloads the `gpt-oss-20b` model, and finally the agent connects to the LLM through the `modelConfigs`.
+
+
+
+<img src="z_images/02-05-001.png" width="1000" style="border-radius: 24px;" />
+
 
 If your external node does not have a GPU, or you want to run everything locally, you need to override the `nodeSelector`, GPU flag, and resource settings in the managed and custom catalog entries.
 This setup was not tested but should work if enough storage is available.
