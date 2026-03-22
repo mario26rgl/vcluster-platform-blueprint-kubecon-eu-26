@@ -106,8 +106,6 @@ controlplane-traefik            Synced        Healthy
 vcluster-2-external-secrets     Synced        Healthy
 ```
 
-Hier ist eine **minimal geglättete Version**, bei der ich nur Grammatik, Tippfehler und Lesbarkeit korrigiert habe, ohne Struktur oder Inhalt stark zu verändern.
-
 
 ## Add External Node - Beyond local Kubernetes Platform 💻👩‍🏫
 
@@ -175,7 +173,7 @@ clusters:
   - name: controlplane
     stage: prod
     type: controlplane
-    dnsName: controlplane-prod.172.18.255.254.nip.io
+    dnsName: controlplane-prod.172.18.255.254.traefik.me
     ingressClassName: traefik
     services:
       ...

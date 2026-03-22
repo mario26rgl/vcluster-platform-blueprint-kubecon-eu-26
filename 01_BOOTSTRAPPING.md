@@ -8,7 +8,7 @@ This guide is for the workshop session:
 
 Please make sure to read the [prerequisites and setup steps](00_PREREQUISITES.md) before the workshop to ensure a smooth experience during the session!
 
-You can find the [workshop blueprint repository here](https://github.com/la-demos/vcluster-platform-blueprint-kubecon-eu-26). Just fork it.
+Fork this [repository](https://github.com/la-demos/vcluster-platform-blueprint-kubecon-eu-26).
 
 You will find the following folder structure in the repo:
 
@@ -39,13 +39,15 @@ vcluster use driver docker
 
 ## vCluster Platform
 
+> ⚠️ Note: you will need to create an account after the platform is started. You will getting automatically logged in and just need to fill out missing data.
+
 ```bash
 vcluster platform start --version v4.7.0
 ```
 
 ## Deploy a vCluster as Control Plane
 
-> ⚠️ macOS: Run the command with `sudo` to allow vCluster to create required network interfaces. Otherwise, LoadBalancer services will not be supported and a warning will be shown.
+> ⚠️ macOS: Run the command with `sudo` to allow vCluster to create the required loopback interface aliases. Without these privileges, LoadBalancer services will not be supported and a warning will be shown. Note that `sudo` is not required for creating the Docker network itself
 
 ```bash
 sudo vcluster create controlplane -f vcluster-config-controlplane.yaml
@@ -98,15 +100,13 @@ The following is just an example:
 ### Project related values
 PROJECT_NAME='controlplane'
 PROJECT_STAGE='prod'
-DOMAIN_NAME='172.18.255.254.nip.io'
+DOMAIN_NAME='172.18.255.254.traefik.me'
 
 ### Argo CD related values
 ARGOCD_WIZARD_ACCOUNT_PASSWORD='Sw0rdF1sh!42_1'
 
 ### Git repository values
 ARGOCD_GIT_HTTPS_URL='https://github.com/<REPLACE_ME>'
-ARGOCD_GIT_PAT_OR_PASSWORD='<REPLACE_ME>'
-ARGOCD_GIT_USERNAME='<REPLACE_ME>'
 ```
 
 After that, run the init command to create a `config.yaml`:
@@ -119,8 +119,8 @@ Fill out the missing values in the `config.yaml`. Override values as needed. For
 
 The only value you might need to change is the DNS (IP address), depending on your container engine network setup. You will get this information later, so you can ignore this block for now:
 
-`dnsName: cp-workshop-prod.172.18.255.254.nip.io`
-→ `dnsName: cp-workshop-prod.YOUR-IP-ADDRESS.nip.io`
+`dnsName: cp-workshop-prod.172.18.255.254.traefik.me`
+→ `dnsName: cp-workshop-prod.YOUR-IP-ADDRESS.traefik.me`
 
 # Step 3 - Bootstrapping the Kubernetes Platform 💻
 
@@ -206,17 +206,17 @@ Just open your ingress host in the browser:
 kubectl get ing -n argocd
 
 NAME                        CLASS     HOSTS                                     ADDRESS          PORTS   AGE
-argocd-additional-ingress   traefik   controlplane-prod.172.18.255.254.nip.io   172.18.255.254   80      15h
+argocd-additional-ingress   traefik   controlplane-prod.172.18.255.254.traefik.me   172.18.255.254   80      15h
 ```
 
 Host:
-[http://controlplane-prod.172.18.255.254.nip.io/argocd/](http://controlplane-prod.172.18.255.254.nip.io/argocd/)
+[http://controlplane-prod.172.18.255.254.traefik.me/argocd/](http://controlplane-prod.172.18.255.254.traefik.me/argocd/)
 
 You should see the Argo CD dashboard after logging in.
 
 You will also see the homer-dashboard if you just open the host without the `/argocd` path:
 
-[http://controlplane-prod.172.18.255.254.nip.io](http://controlplane-prod.172.18.255.254.nip.io)
+[http://controlplane-prod.172.18.255.254.traefik.me](http://controlplane-prod.172.18.255.254.traefik.me)
 
 ![Homer Dashboard](z_images/kubara-developer-portal.png)
 

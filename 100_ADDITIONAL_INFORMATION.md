@@ -15,6 +15,6 @@ This part provides additional information beyond the workshop content.
 * [Kubara Docs](https://docs.kubara.io/)
 * [Kubara Repository](https://github.com/kubara-io/kubara)
 * [External Secrets + Bitwarden Secrets Manager](https://external-secrets.io/latest/provider/bitwarden-secrets-manager/)
-* [What is nip.io?](https://nip.io/)
+* [What is traefik.me?](https://traefik.me/)
 * [What is tailscale?](https://tailscale.com)
 

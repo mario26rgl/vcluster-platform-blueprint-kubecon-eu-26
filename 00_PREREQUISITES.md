@@ -6,11 +6,11 @@ Please ensure you have the following prerequisites in place before starting the 
 
 Please ensure the following tools are installed:
 
-* **Docker Desktop**, **OrbStack**, or another container runtime
-* **kubectl**
-* **vcluster CLI**
-* **Helm**
-* **Git CLI**
+* **[Docker Desktop](https://www.docker.com/products/docker-desktop/)**, **[OrbStack](https://orbstack.dev/)**, or another container runtime
+* **[kubectl](https://kubernetes.io/docs/tasks/tools/)**
+* **[vcluster CLI](https://www.vcluster.com/docs/platform/install/quick-start-guide)**
+* **[Helm](https://helm.sh/docs/intro/install/)**
+* **[Git CLI](https://git-scm.com/install/)**
 * Access to a **Git repository**
 
 ## Hardware Requirements
@@ -30,21 +30,27 @@ To ensure a smooth workshop experience, increase your container runtime (e.g., D
 * **6–8 CPU cores**
 * **50–100 GB free disk space**
 
+**⚠️ Note for Docker users ⚠️**
+
+Our vCluster setup currently assumes that the Docker network uses the subnet 172.20.0.0/16.
+
+If not adjusted, the Ingress resources may contain incorrect domains, and you might not be able to access Argo CD or the Homer Dashboard.
+
+**What to do:**
+
+Update the subnet/IP-related values in the values.yaml files (Argo CD and Homer) to match your Docker network subnet before deploying.
+
 # Tool Requirements
 
 All required tools are available in their free tier.
 
 * **Bitwarden Secrets Manager**
-* **Git repository**
-
-  * The easiest way to create one is via GitHub or just fork this repo!
-  * If your repository is private, you need a [**Personal Access Token (PAT)**](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) with content access `read-only`.
 
 # Bitwarden Secrets Manager Setup
 
 ## 1. Create an Account
 
-Go to [https://bitwarden.com](https://bitwarden.com) and create an account if you don’t already have one.
+Go to [https://bitwarden.com](https://bitwarden.com) and create an account and organization if you don’t already have one.
 
 > ⚠️ Switch to **Secrets Manager** in the left sidebar!
 
