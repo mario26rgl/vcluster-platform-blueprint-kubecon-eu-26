@@ -118,6 +118,13 @@ externalSecrets:
     controlplane-prod:
       kind: ClusterSecretStore
       name: controlplane-prod
+  
+  secrets:
+    db-password:
+      secretStoreRef: controlplane-prod
+      data:
+        - secretKey: password
+          remoteKey: db-password
 
 
 additionalIngress:
