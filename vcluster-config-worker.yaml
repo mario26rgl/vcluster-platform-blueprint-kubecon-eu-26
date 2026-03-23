@@ -1,0 +1,25 @@
+# controlPlane:
+#   advanced:
+#     konnectivity:
+#       agent:
+#         enabled: false
+#       server:
+#         enabled: false
+#   distro:
+#     k8s:
+#       version: v1.35.0
+#   standalone:
+#     enabled: true
+experimental:
+  docker:
+    enabled: true
+    nodes:
+    - name: worker-1
+    registryProxy:
+      enabled: false
+privateNodes:
+  enabled: true
+  vpn:
+    enabled: true
+    nodeToNode:
+      enabled: true

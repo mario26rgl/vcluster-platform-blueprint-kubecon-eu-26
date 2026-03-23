@@ -12,6 +12,18 @@ bootstrapValues:
           - kind: Secret
             name: cert-manager-webhook-ca
 
+  cluster:
+    - additionalLabels:
+        external-secrets: "activated"
+      name: vcluster-2
+      project: controlplane-prod
+      remoteRef:
+        remoteKey: vcluster-2
+        remoteKeyProperty: vcluster-2
+      secretStoreRef:
+        kind: ClusterSecretStore
+        name: controlplane-prod
+
   applicationSets:
     controlplane-prod:
       projectName: "controlplane-prod"
