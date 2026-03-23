@@ -7,7 +7,7 @@ metadata:
 spec:
   provider:
     bitwardensecretsmanager:
-      apiURL: https://vault.bitwarden.com/api
+      apiURL: https://vault.bitwarden.eu/api
       auth:
         secretRef:
           credentials:
@@ -20,7 +20,6 @@ spec:
         name: bitwarden-tls-certs
         namespace: external-secrets
         type: Secret
-      identityURL: https://vault.bitwarden.com/identity
-      organizationID: <REPLACE_ME>
-      projectID: <REPLACE_ME>
-
+      identityURL: https://vault.bitwarden.eu/identity
+      organizationID: c7633f6f-0dd3-482a-8b92-b4160093d401
+      projectID: f7a17539-c86b-4263-a8c2-b41600940e20
